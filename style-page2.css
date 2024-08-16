@@ -1,0 +1,307 @@
+/* Estilos Gerais */
+body {
+    font-family: Arial, sans-serif;
+    background: url("imagem.jpg") no-repeat center center fixed, #f0f0f0; /* Adiciona uma cor de fundo de fallback */
+    background-size: cover;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #071564;
+    color: white;
+    max-width: 1200px; /* Limita a largura máxima */
+    margin: 0 auto; /* Centraliza o header */
+}
+
+/* Botão de Voltar */
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    display: inline-block; /* Alinha com outros itens */
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+/* Container de Filtros e Botão de Voltar */
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Alinhamento do Filtro e Botão de Voltar */
+.header > .filter-container {
+    margin-left: auto; /* Alinha o filtro à direita no header */
+}
+
+/* Labels */
+label {
+    font-size: 1.1rem;
+}
+
+/* Campos de Data */
+.date-input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+/* Botão de Filtro */
+.filter-button {
+    background-color: #ff5722;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.filter-button:hover {
+    background-color: #e64a19;
+    transform: scale(1.05);
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+/* Cabeçalhos e Células */
+th, td {
+    padding: 15px; /* Aumenta o padding para melhorar a legibilidade */
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Cabeçalhos da Tabela */
+th {
+    background-color: #071564;
+    color: white;
+}
+
+/* Células da Tabela */
+td {
+    background-color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Efeito de Hover nas Células */
+td:hover {
+    background-color: #e3f2fd;
+}
+
+/* Cores Específicas para Status */
+td.concluido {
+    background-color: #4caf50;
+    color: white;
+}
+
+td.nao-concluido {
+    background-color: #ffeb3b;
+    color: black;
+}
+
+/* Estilo para o ícone da lixeira */
+.trash-icon {
+    cursor: pointer;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('trash-icon.png') no-repeat center center;
+    background-size: contain;
+}
+
+.trash-icon:hover {
+    opacity: 0.7;
+}
+
+/* Estilos para o pop-up */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1001;
+    box-sizing: border-box;
+}
+
+#popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+#popup-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.lixeira-icon {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.lixeira-icon img {
+    width: 24px;
+    height: 24px;
+}
+
+#popup-content {
+    margin-bottom: 20px;
+}
+
+#popup-content p {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#popup-content p:last-child {
+    border-bottom: none;
+}
+
+#popup-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#popup button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#popup-close {
+    background-color: #ccc;
+    color: #333;
+}
+
+#popup-concluir {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#popup-close:hover {
+    background-color: #bbb;
+}
+
+#popup-concluir:hover {
+    background-color: #45a049;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .filter-container {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+}
+
+/* Estilo para botões e elementos de pop-up */
+button {
+    border: none;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 4px;
+}
+
+input, select {
+    font-size: 1rem;
+}
+
+/* Estilo para a logo */
+.logo-container {
+    position: fixed;
+    bottom: 10px; /* Agora a logo estará sempre visível perto do rodapé */
+    right: 10px;
+    z-index: 100;
+}
+
+.logo {
+    width: 200px; /* Ajustado para um tamanho mais compacto */
+    height: auto;
+}
+/* Botão Novo Cadastro */
+#novoCadastro {
+    background-color: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    display: inline-block;
+}
+
+#novoCadastro:hover {
+    background-color: #218838; /* Verde mais escuro */
+    transform: scale(1.05);
+}
+
+#novoCadastro:focus {
+    outline: 2px solid #1e7e34; /* Verde mais escuro para foco */
+    outline-offset: 4px;
+}

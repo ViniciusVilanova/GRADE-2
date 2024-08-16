@@ -1,0 +1,145 @@
+/* Reset básico e estilo global */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url("imagem.jpg") no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #495057;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para o cabeçalho da página de cadastro */
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin: 30px 0;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+/* Estilos para o formulário de cadastro */
+form {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para os rótulos dos campos do formulário */
+form label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: 500;
+    font-size: 1em;
+    color: #343a40;
+}
+
+/* Estilos para os campos de entrada e seleção */
+form input[type="text"],
+form input[type="date"],
+form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1em;
+    color: #495057;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilos para os botões dentro do formulário */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-container button {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.button-container button:last-child {
+    margin-right: 0;
+}
+
+/* Estilos para o botão de envio */
+form button.primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+form button.primary:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos gerais para botões */
+button {
+    cursor: pointer;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo específico para o botão que redireciona para a Página 2 */
+button.secondary {
+    background-color: #28a745;
+    color: white;
+}
+
+button.secondary:hover {
+    background-color: #218838;
+}
+
+/* Adicionando uma classe para o botão de cancelar ou voltar */
+button.cancel {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+button.cancel:hover {
+    background-color: #e0a800;
+}
+
+/* Adicionando uma classe para botões de ação secundária */
+button.action {
+    background-color: #28a745;
+    color: white;
+}
+
+button.action:hover {
+    background-color: #218838;
+}
+
+/* Estilo para o logotipo */
+.logo {
+    position: fixed;
+    bottom: 10px; /* Distância da parte inferior da página */
+    right: 10px;  /* Distância da parte direita da página */
+    width: 100px; /* Largura da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    z-index: 1000; /* Garante que a imagem fique sobreposta aos outros elementos */
+}

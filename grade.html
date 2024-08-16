@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRADE DE HORÁRIOS</title>
+    <link rel="stylesheet" href="style-page2.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Grade de horários</h1>
+        <div class="filter-container">
+            <button id="novoCadastro" type="button" onclick="window.location.href='index.html'">Novo Cadastro</button>
+            <label for="dataFiltro">Filtrar por Data:</label>
+            <input type="date" id="dataFiltro" class="date-input">
+            <button class="filter-button" onclick="carregarGrade()">Filtrar</button>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Horários</th>
+                <th>Veículo 1</th>
+                <th>Veículo 2</th>
+                <th>Veículo 3</th>
+            </tr>
+        </thead>
+        <tbody id="gradeHorarios">
+            <!-- Horários de exemplo -->
+            <tr>
+                <td>11:00</td>
+                <td id="11:00-1"></td>
+                <td id="11:00-2"></td>
+                <td id="11:00-3"></td>
+            </tr>
+            <tr>
+                <td>12:00</td>
+                <td id="12:00-1"></td>
+                <td id="12:00-2"></td>
+                <td id="12:00-3"></td>
+            </tr>
+            <tr>
+                <td>13:00</td>
+                <td id="13:00-1"></td>
+                <td id="13:00-2"></td>
+                <td id="13:00-3"></td>
+            </tr>
+            <tr>
+                <td>14:00</td>
+                <td id="14:00-1"></td>
+                <td id="14:00-2"></td>
+                <td id="14:00-3"></td>
+            </tr>
+            <tr>
+                <td>15:00</td>
+                <td id="15:00-1"></td>
+                <td id="15:00-2"></td>
+                <td id="15:00-3"></td>
+            </tr>
+            <tr>
+                <td>16:00</td>
+                <td id="16:00-1"></td>
+                <td id="16:00-2"></td>
+                <td id="16:00-3"></td>
+            </tr>
+            <tr>
+                <td>17:00</td>
+                <td id="17:00-1"></td>
+                <td id="17:00-2"></td>
+                <td id="17:00-3"></td>
+            </tr>
+            <tr>
+                <td>19:00</td>
+                <td id="19:00-1"></td>
+                <td id="19:00-2"></td>
+                <td id="19:00-3"></td>
+            </tr>
+            <tr>
+                <td>20:00</td>
+                <td id="20:00-1"></td>
+                <td id="20:00-2"></td>
+                <td id="20:00-3"></td>
+            </tr>
+            <tr>
+                <td>21:00</td>
+                <td id="21:00-1"></td>
+                <td id="21:00-2"></td>
+                <td id="21:00-3"></td>
+            </tr>
+            <!-- Adicione mais horários conforme necessário -->
+        </tbody>              
+    </table>
+
+    <div id="overlay"></div>
+    <div id="popup">
+        <div id="popup-header">
+            <h2>Detalhes do Carregamento</h2>
+            <span class="lixeira-icon" onclick="removerCarregamento()">
+                <img src="lixeira-icone.png" alt="Ícone de Lixeira">
+            </span>
+        </div>
+        <div id="popup-content">
+            <!-- Conteúdo será inserido dinamicamente com JavaScript -->
+        </div>
+        <div id="popup-footer">
+            <button id="popup-close" onclick="fecharPopup()">Fechar</button>
+            <button id="popup-concluir" onclick="marcarConcluido()">Marcar como Concluído</button>
+        </div>
+    </div>
+
+    <script>
+        let dataAtual;
+        let horarioAtual;
+        let indexAtual;
+
+        function carregarGrade() {
+            const data = document.getElementById("dataFiltro").value;
+            const carregamentos = JSON.parse(localStorage.getItem("carregamentos")) || {};
+            const horarios = ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "19:00", "20:00", "21:00"];
+
+            horarios.forEach(horario => {
+                for (let i = 1; i <= 3; i++) {
+                    const cell = document.getElementById(`${horario}-${i}`);
+                    cell.textContent = "";
+                    cell.className = "";
+                    cell.onclick = null;
+                }
+            });
+
+            for (const [dataKey, horariosData] of Object.entries(carregamentos)) {
+                if (!data || data === dataKey) {
+                    for (const [horario, veículos] of Object.entries(horariosData)) {
+                        veículos.forEach((carregamento, index) => {
+                            const cell = document.getElementById(`${horario}-${index + 1}`);
+                            if (cell) {
+                                cell.textContent = carregamento.modeloVeiculo;
+                                cell.onclick = () => mostrarDetalhes(dataKey, horario, index);
+                                cell.className = carregamento.concluido ? "concluido" : "";
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
+        function mostrarDetalhes(data, horario, index) {
+            const carregamentos = JSON.parse(localStorage.getItem("carregamentos")) || {};
+            const carregamento = carregamentos[data][horario][index];
+            const popupContent = document.getElementById("popup-content");
+
+            popupContent.innerHTML = `
+                <p><strong>Data:</strong> ${data}</p>
+                <p><strong>Horário:</strong> ${horario}</p>
+                <p><strong>Motorista:</strong> ${carregamento.motorista}</p>
+                <p><strong>Notas Fiscais:</strong> ${carregamento.notasFiscais}</p>
+                <p><strong>Modelo do Veículo:</strong> ${carregamento.modeloVeiculo}</p>
+                <p><strong>Observação:</strong> ${carregamento.observacao || 'Nenhuma observação disponível'}</p>
+            `;
+
+            dataAtual = data;
+            horarioAtual = horario;
+            indexAtual = index;
+
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function fecharPopup() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
+        }
+
+        function marcarConcluido() {
+            const carregamentos = JSON.parse(localStorage.getItem("carregamentos")) || {};
+            const carregamento = carregamentos[dataAtual][horarioAtual][indexAtual];
+            carregamento.concluido = true;
+
+            localStorage.setItem("carregamentos", JSON.stringify(carregamentos));
+            carregarGrade();
+            fecharPopup();
+        }
+
+        function removerCarregamento() {
+            if (confirm("Tem certeza que deseja remover este carregamento?")) {
+                const carregamentos = JSON.parse(localStorage.getItem("carregamentos")) || {};
+                carregamentos[dataAtual][horarioAtual].splice(indexAtual, 1);
+
+                if (carregamentos[dataAtual][horarioAtual].length === 0) {
+                    delete carregamentos[dataAtual][horarioAtual];
+                }
+
+                if (Object.keys(carregamentos[dataAtual]).length === 0) {
+                    delete carregamentos[dataAtual];
+                }
+
+                localStorage.setItem("carregamentos", JSON.stringify(carregamentos));
+                carregarGrade();
+                fecharPopup();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", carregarGrade);
+    </script>
+</body>
+</html>
